@@ -16,5 +16,5 @@ CREATE TABLE category_table(
     id INT NOT NULL,
     category_name varchar(30) NOT NULL,
     primary key (id)
-)
+);
 
