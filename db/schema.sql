@@ -4,7 +4,8 @@ CREATE DATABASE openquiz_db;
 
 USE openquiz_db;
 
-CREATE TABLE player_table (
+CREATE TABLE player_table 
+(
   id INT NOT NULL AUTO_INCREMENT,
   name varchar(30) NOT NULL,
   email varchar(30),
@@ -13,8 +14,9 @@ CREATE TABLE player_table (
 
 CREATE TABLE category_table
 (
-    id INT NOT NULL,
+    id INT NOT NULL AUTO_INCREMENT,
     category_name varchar(30) NOT NULL,
+    category_id INT NOT NULL,
     primary key (id)
 );
 
