@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable camelcase */
 /* eslint-disable prettier/prettier */
 /* eslint-disable indent */
@@ -8,15 +9,7 @@ module.exports = function(sequelize, DataTypes)
 {
 	const Score = sequelilze.define("score",
 	{
-		name:
-		{
-			type: DataTypes.SRING,
-			allowNull: false,
-			validate:
-			{
-				len:[1,30]
-			}
-		},
+	
 
 		score:
 			{
@@ -34,8 +27,13 @@ module.exports = function(sequelize, DataTypes)
 			{
 				allowNull: false				
 			}
-    	});
-	  };
+		}),
+
+		Score.belongsTo(models.Player,
+			{
+				foreignKey: {allowNull:false}
+			});
+	};
 
    Score_table.sync();
 
