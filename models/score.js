@@ -1,6 +1,9 @@
 /* eslint-disable camelcase */
 /* eslint-disable prettier/prettier */
 /* eslint-disable indent */
+
+const Sequelize = require("sequelize");
+
 module.exports = function(sequelize, DataTypes) 
 {
 	const Score = sequelilze.define("score",
@@ -36,5 +39,5 @@ module.exports = function(sequelize, DataTypes)
 
    Score_table.sync();
 
-  return POST;
+  return Score;
 };
