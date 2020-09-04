@@ -3,20 +3,16 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable indent */
 
-const Sequelize = require("sequelize");
-
 module.exports = function(sequelize, DataTypes) 
 {
-	const Score = sequelilze.define("score",
+	const Score = sequelize.define("Score",
 	{
-	
-
 		score:
-			{
-				type: DataTypes.INTEGER,
-				allowNull: false,
-				isInt: true
-			}			  
+		{
+			type: DataTypes.INTEGER,
+			allowNull: false,
+			isInt: true
+		}			  
 	});
 	
 	Score.associate = function(models)
@@ -30,12 +26,10 @@ module.exports = function(sequelize, DataTypes)
 		}),
 
 		Score.belongsTo(models.Player,
-			{
-				foreignKey: {allowNull:false}
-			});
+		{
+			foreignKey: {allowNull:false}
+		});
 	};
-
-   Score_table.sync();
 
   return Score;
 };

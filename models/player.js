@@ -1,8 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable indent */
 /* eslint-disable prettier/prettier */
-const Sequelize = require("sequelize");
-
 
 module.exports = function(sequelize, DataTypes) {
     const Player = sequelize.define("Player", {
@@ -13,9 +11,8 @@ module.exports = function(sequelize, DataTypes) {
     });
   
     Player.associate = function(models) {
-      Player.hasMany(models.Score);
-  };
-
+      Player.hasMany(models.Score, {});
+    };
 
     return Player;
   };
