@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-    const Category = sequelize.define("category",{
+    const Category = sequelize.define("Category",{
         category_name: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -17,7 +17,7 @@ module.exports = function(sequelize, DataTypes) {
     });
 
     Category.associate = function(models) {
-        Category.hasMany(models.Score);
+        Category.hasMany(models.Score, {});
     };
 
     return Category;
