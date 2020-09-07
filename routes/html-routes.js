@@ -2,12 +2,10 @@
 const path = require("path");
 const axios = require("axios");
 
-
-
 // Requiring our custom middleware for checking if a user is logged in
 const isAuthenticated = require("../config/middleware/isAuthenticated");
 
-module.exports = function (app) {
+module.exports = function(app) {
   app.get("/", (req, res) => {
     // If the user already has an account send them to the members page
     if (req.user) {
@@ -21,21 +19,20 @@ module.exports = function (app) {
     const quizURL = `https://opentdb.com/api.php?amount=10&category=${req.params.id}&difficulty=easy&type=multiple`;
 
     axios.get(quizURL).then(results => {
-     /*  console.log("results: ", results.data.results); */
+      /*  console.log("results: ", results.data.results); */
 
-      let trivia = { results: results.data.results };
+      const trivia = { results: results.data.results };
 
-      let formattedTrivia = results.data.results.map(function (data)  {
+      const formattedTrivia = results.data.results.map(data => {
         return escapeHtml(data.question);
         //return data;
-        });
+      });
 
-     
-        console.log("formattedTrivia: ", formattedTrivia);
-/* 
+      console.log("formattedTrivia: ", formattedTrivia);
+      /* 
       console.log("results.data.results.length: ", results.data.results.length); */
 
-/* 
+      /* 
       for (i = 0; i < results.data.results.length; i++) {
         let formQuest = escapeHtml(results.data.results[i].question);
         trivia.push(formQuest);
