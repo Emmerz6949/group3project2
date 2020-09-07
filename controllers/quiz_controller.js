@@ -23,7 +23,7 @@ router.get("/api/scores", (req, res) => {
     res.json(dbScore);
   });
 });
-
+g
 router.post("/api/signup", (req, res) => {
   db.User.create({
     email: req.body.email,

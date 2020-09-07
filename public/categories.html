@@ -7,11 +7,12 @@
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="stylesheets/style.css">
 </head>
 <body>
 
-  <nav class="nav-wrapper amber lighten-5">
+  <nav class="nav-wrapper transparent">
     <div class="container">
       <a href="index.html" class="brand-logo center">
         <span class="deep-orange-text">The Trivia Project</span>
@@ -19,7 +20,7 @@
       <a href="#" class="sidenav-trigger deep-orange-text" data-target = "mobile-links">
         <i class="material-icons">menu</i>
       </a>
-      <ul id = 'nav-mobile' class= "right hide-on-med-and-down">
+      <ul id = 'nav-mobile' class= "left hide-on-med-and-down">
         <li><a href="index.html"><span class="deep-orange-text">Home</span></a></li>
         <li><a href="highscores.html"><span class="deep-orange-text">Highscores</span></a></li>
         <li><a href="categories.html"><span class="deep-orange-text">Take Quiz</span></a></li>
@@ -35,13 +36,11 @@
   </ul>
 
   <div class="container">
-    <h1>Pick a Quiz!</h1>
+    <h1 class = 'center'>Choose A Quiz</h1>
 
-    <div class="row">
+    <div class="row category-row">
 
-      
-
-      </div>
+    </div>
 
   </div>
 
@@ -64,7 +63,7 @@
 
       //array of categories for user to choose from 
       let categories = ['Video Games', 'Books', 'Cartoons and Animations', 
-      'Film', 'Music', 'Board Games', 'Television' ]
+      'Film', 'Music', 'Television' ]
 
       //creates new card for each quiz category 
       categories.forEach(category => {
@@ -81,7 +80,7 @@
         card.append(content); 
         newCategory.append(card); 
 
-        $('.row').append(newCategory); 
+        $('.category-row').append(newCategory); 
       })
     })
 
