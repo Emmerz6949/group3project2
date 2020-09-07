@@ -19,24 +19,12 @@ module.exports = function(app) {
     const quizURL = `https://opentdb.com/api.php?amount=10&category=${req.params.id}&difficulty=easy&type=multiple`;
 
     axios.get(quizURL).then(results => {
-      /*  console.log("results: ", results.data.results); */
-
       const trivia = { results: results.data.results };
 
       const formattedTrivia = results.data.results.map(data => {
         return escapeHtml(data.question);
         //return data;
       });
-
-      console.log("formattedTrivia: ", formattedTrivia);
-      /* 
-      console.log("results.data.results.length: ", results.data.results.length); */
-
-      /* 
-      for (i = 0; i < results.data.results.length; i++) {
-        let formQuest = escapeHtml(results.data.results[i].question);
-        trivia.push(formQuest);
-      } */
 
       function escapeHtml(text) {
         return text
@@ -47,9 +35,9 @@ module.exports = function(app) {
           .replace(/&#039;/g, "'");
       }
 
-      //console.log("trivia: ", formattedTrivia);
+      console.log("formattedTrivia: ", formattedTrivia);
 
-      res.render("quiz", formattedTrivia);
+      res.render("quiz", { trivia: formattedTrivia });
     });
   });
 

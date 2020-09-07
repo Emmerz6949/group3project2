@@ -3,9 +3,19 @@
 </div>
 
 <div>
-    {{#each results}}
-        <li>
-            {{question}}            
-        </li>
-        {{/each}}
+    {{#each trivia}}
+     <li>
+          {{this}}
+     </li>
+
+
+        
+    {{/each}}
 </div>
+
+{{!--     <li>
+            {{question}}
+            <li>
+               {{incorrect_answers}},{{correct_answer}}                           
+            </li>            
+        </li> --}}
