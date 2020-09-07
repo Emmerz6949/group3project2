@@ -6,7 +6,6 @@ VALUES ("Books",10),
        ("Music",12),
        ("Television",14),
        ("Video Games",15),
-       ("Comics",29),
        ("Anime and Manga",31),
        ("Cartoons",32);
        
