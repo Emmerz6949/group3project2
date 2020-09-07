@@ -1,8 +1,25 @@
 const express = require("express");
 const db = require("../models");
 const passport = require("../config/passport");
+const axios = require("axios");
+
+
 
 const router = express.Router();
+
+router.get("/quiz/:id", (req, res) => {
+  const quizURL = `https://opentdb.com/api.php?amount=10&category=${req.params.id}&difficulty=easy&type=multiple`;
+
+  axios.get(quizURL).then(function (results){
+              console.log("results: ", results);
+        
+
+  //let variable = //axios to get all the questions
+    res.render("quiz", results);
+});
+
+
+
 
 router.get("/api/categories", (req, res) => {
   db.Category.findAll({}).then(dbCategory => {
