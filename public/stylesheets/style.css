@@ -34,7 +34,7 @@ nav ul li:hover {
   bottom: -310px; 
 }
 
-.highscore, h1{ 
+.highscore, .quiz-title{ 
   margin: 0 auto; 
   background-color: white; 
   width: 500px; 
@@ -46,7 +46,7 @@ nav ul li:hover {
 
 .card{ 
   width: 500px; 
-  background-color: #e3f2fd
+  background-color: #e3f2fd;
 }
 
 .card:hover{ 
