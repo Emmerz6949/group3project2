@@ -36,15 +36,17 @@ $(document).ready(() => {
    const generateQuiz  = category =>{
      //alert(category); 
 
+     //when user clicks take quiz
+     //the appropriate quiz will appear
+     //ajax call to right quiz using the data-quiz attribute set to each button
      $.ajax({
+       //url specific to videogames
        url: "/quiz/15", 
        method: "GET"
      }).then(function(response){ 
        return; 
      })
-     //when user clicks take quiz
-     //the appropriate quiz will appear
-     //ajax call to right quiz using the data-quiz attribute set to each button
+
    }
  
 });

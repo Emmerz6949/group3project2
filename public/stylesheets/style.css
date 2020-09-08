@@ -9,7 +9,7 @@ main {
 }
 
 .main-container{ 
-  background: url(https://images.unsplash.com/photo-1498940757830-82f7813bf178?ixlib=rb-1.2.1&auto=format&fit=crop&w=967&q=80); 
+  background: url(https://images.unsplash.com/photo-1584098113770-a5922198255a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80); 
   background-size: cover; 
   background-position: center; 
   min-height: 1000px; 
@@ -37,6 +37,9 @@ nav ul li:hover {
   background-color: #fbe9e7;
 }
 
+.placeholder{ 
+
+}
 @media screen and (max-width: 670px){
   .main-container { 
     min-height: 500px; 
