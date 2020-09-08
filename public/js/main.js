@@ -10,7 +10,7 @@ $(document).ready(() => {
    categories.forEach(category => {
      let newCategory = $('<div>').addClass('s12 l6'); 
      
-     let card = $('<div>').addClass('card'); 
+     let card = $('<div>').addClass('card center'); 
 
      let content = $('<div>').addClass('card-content'); 
 
@@ -22,9 +22,7 @@ $(document).ready(() => {
      btn.text('Take Quiz'); 
 
      //when user clicks quiz, makes api call in generateQuiz
-     btn.on('click', function(){
-       generateQuiz(category);  
-     })
+     btn.attr('href', '/quiz/15');
 
      content.append(categoryTitle, btn); 
      card.append(content); 
