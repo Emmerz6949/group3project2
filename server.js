@@ -42,10 +42,20 @@ require("./routes/quiz-api-routes.js")(app);
 async function tableUpdate() {
   await db.sequelize.sync({ force: true });
 
+  await db.Category.bulkCreate([
+    { categoryName: "Books", apiCategoryId: 10 },
+    { categoryName: "Film", apiCategoryId: 11 },
+    { categoryName: "Music", apiCategoryId: 12 },
+    { categoryName: "Television", apiCategoryId: 14 },
+    { categoryName: "Video Games", apiCategoryId: 15 },
+    { categoryName: "Anime and Manga", apiCategoryId: 31 },
+    { categoryName: "Cartoons", apiCategoryId: 32 }
+  ]);
+
   const quizURL =
     "https://opentdb.com/api.php?amount=10&category=15&difficulty=easy&type=multiple";
 
-  axios.get(quizURL).then(results => {
+  axios.get(quizURL).then(async results => {
     const dataSet = results.data;
 
     const cleanResults = dataSet.results.map(result => {
@@ -61,23 +71,44 @@ async function tableUpdate() {
     });
 
     for (i = 0; i < cleanResults.length; i++) {
-      console.log("\x1b[35m%s\x1b[0m", cleanResults[i].question); //purple
-      console.log("\x1b[36m%s\x1b[0m", cleanResults[i].correct_answer); //cyan
+      await db.Question.create({ questionText: cleanResults[i].question }); //it gets mad at this
 
-      async function createQuestions() {
-        await db.Question.create({ questionText: cleanResults[i].question });
+      // async function createQuestions() {
+      //   await db.Question.create({ questionText: cleanResults[i].question });
+      // }
+      // // db.Question.create({ questionText: cleanResults[i].question });
+      // await createQuestions();
+
+      function qcid() {
+        const id = i + 1;
+        return id;
       }
 
       async function createCorrect() {
         await db.Answer.create({
           answerText: cleanResults[i].correct_answer,
           isCorrect: true,
-          QuestionId: i + 1
+          QuestionId: await qcid()
         });
       }
 
-      createQuestions();
-      createCorrect();
+      console.log("\x1b[35m%s\x1b[0m", cleanResults[i].question); //purple
+      console.log("\x1b[36m%s\x1b[0m", cleanResults[i].correct_answer); //cyan
+
+      for (z = 0; z < cleanResults[i].incorrect_answers.length; z++) {
+        console.log("\x1b[31m%s\x1b[0m", cleanResults[i].incorrect_answers[z]); //red
+
+        async function createWrong() {
+          await db.Answer.create({
+            answerText: cleanResults[i].incorrect_answers[z],
+            isCorrect: false,
+            QuestionId: await qcid()
+          });
+        }
+
+        createWrong();
+      }
+      await createCorrect();
     }
 
     function unescapeHtml(text) {
@@ -87,9 +118,15 @@ async function tableUpdate() {
         .replace(/&gt;/g, ">")
         .replace(/&quot;/g, '"')
         .replace(/&#039;/g, "'")
-        .replace(/&eacute;/g, "é");
+        .replace(/&eacute;/g, "é")
+        .replace(/&Uuml;/g, "Ü")
+        .replace(/&rsquo;/g, "’");
     }
   });
+}
+
+async function earsAreHearing() {
+  await tableUpdate();
 
   app.listen(PORT, () => {
     console.log(
@@ -100,4 +137,4 @@ async function tableUpdate() {
   });
 }
 
-tableUpdate();
+earsAreHearing();

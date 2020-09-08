@@ -5,13 +5,22 @@ const axios = require("axios");
 
 const router = express.Router();
 
-router.get("/quiz/:id", (req, res) => {
-  const quizURL = `https://opentdb.com/api.php?amount=10&category=${req.params.id}&difficulty=easy&type=multiple`;
+router.get("/quiz/15", (req, res) => {
+  db.Question.findAll({
+    include: [db.Answer]
+  }).then(dbQuestion => {
+    const resultsJSON = dbQuestion.map(result => {
+      return result.toJSON();
+    });
 
-  axios.get(quizURL).then(results => {
-    console.log("results: ", results);
-    res.render("quiz", results);
+    // console.log("\x1b[33m%s\x1b[0m", resultsJSON); //yellow
+    res.render("quiz", { trivia: resultsJSON });
   });
+
+  //   const quizURL = `https://opentdb.com/api.php?amount=10&category=${req.params.id}&difficulty=easy&type=multiple`;
+
+  //   axios.get(quizURL).then(results => {
+  //     console.log("results: ", results);
 });
 
 router.get("/api/categories", (req, res) => {
