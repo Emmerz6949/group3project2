@@ -19,14 +19,22 @@ module.exports = function(app) {
     const quizURL = `https://opentdb.com/api.php?amount=10&category=${req.params.id}&difficulty=easy&type=multiple`;
 
     axios.get(quizURL).then(results => {
-      const trivia = { results: results.data.results };
+      const dataSet = results.data;
 
-      const formattedTrivia = results.data.results.map(data => {
-        return escapeHtml(data.question);
-        //return data;
+      const cleanResults = dataSet.results.map(result => {
+        const cleanResult = result;
+        cleanResult.question = unescapeHtml(result.question);
+        cleanResult.correct_answer = unescapeHtml(result.correct_answer);
+        cleanResult.incorrect_answers = result.incorrect_answers.map(
+          tempAnswer => {
+            return unescapeHtml(tempAnswer);
+          }
+        );
+        return result;
       });
+      console.log(JSON.stringify(cleanResults[0], null, 2));
 
-      function escapeHtml(text) {
+      function unescapeHtml(text) {
         return text
           .replace(/&amp;/g, "&")
           .replace(/&lt;/g, "<")
@@ -35,9 +43,7 @@ module.exports = function(app) {
           .replace(/&#039;/g, "'");
       }
 
-      console.log("formattedTrivia: ", formattedTrivia);
-
-      res.render("quiz", { trivia: formattedTrivia });
+      res.render("quiz", { trivia: cleanResults });
     });
   });
 

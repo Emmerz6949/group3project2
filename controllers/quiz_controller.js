@@ -28,12 +28,12 @@ router.post("/api/newScore", (req, res) => {
 
 router.get("/api/scores", (req, res) => {
   db.Score.findAll({
-    include: [db.Category, db.Player]
+    include: [db.Category, db.User]
   }).then(dbScore => {
     res.json(dbScore);
   });
 });
-g
+g;
 router.post("/api/signup", (req, res) => {
   db.User.create({
     email: req.body.email,
