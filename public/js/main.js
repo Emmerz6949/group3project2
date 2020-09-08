@@ -34,7 +34,14 @@ $(document).ready(() => {
    })
 
    const generateQuiz  = category =>{
-     alert(category); 
+     //alert(category); 
+
+     $.ajax({
+       url: "/api/categories", 
+       method: "GET"
+     }).then(function(response){ 
+       console.log(response); 
+     })
      //when user clicks take quiz
      //the appropriate quiz will appear
      //ajax call to right quiz using the data-quiz attribute set to each button
