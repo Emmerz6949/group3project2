@@ -1,6 +1,6 @@
 // Requiring path to so we can use relative routes to our HTML files
 const path = require("path");
-const axios = require("axios");
+const db = require("../models");
 
 // Requiring our custom middleware for checking if a user is logged in
 const isAuthenticated = require("../config/middleware/isAuthenticated");
@@ -15,35 +15,43 @@ module.exports = function(app) {
     res.render("index");
   });
 
-  app.get("/quiz/:id", (req, res) => {
-    const quizURL = `https://opentdb.com/api.php?amount=10&category=${req.params.id}&difficulty=easy&type=multiple`;
-
-    axios.get(quizURL).then(results => {
-      const dataSet = results.data;
-
-      const cleanResults = dataSet.results.map(result => {
-        const cleanResult = result;
-        cleanResult.question = unescapeHtml(result.question);
-        cleanResult.correct_answer = unescapeHtml(result.correct_answer);
-        cleanResult.incorrect_answers = result.incorrect_answers.map(
-          tempAnswer => {
-            return unescapeHtml(tempAnswer);
-          }
-        );
-        return result;
+  app.get("/quiz/15", (req, res) => {
+    db.Question.findAll({
+      include: [db.Answer]
+    }).then(dbQuestion => {
+      const resultsJSON = dbQuestion.map(result => {
+        return result.toJSON();
       });
-      console.log(JSON.stringify(cleanResults[0], null, 2));
 
-      function unescapeHtml(text) {
-        return text
-          .replace(/&amp;/g, "&")
-          .replace(/&lt;/g, "<")
-          .replace(/&gt;/g, ">")
-          .replace(/&quot;/g, '"')
-          .replace(/&#039;/g, "'");
-      }
+      // console.log("\x1b[33m%s\x1b[0m", resultsJSON); //yellow
+      res.render("quiz", { trivia: resultsJSON });
+      // res.render("quiz", { trivia: cleanResults });
+      // const quizURL = `https://opentdb.com/api.php?amount=10&category=${req.params.id}&difficulty=easy&type=multiple`;
 
-      res.render("quiz", { trivia: cleanResults });
+      // axios.get(quizURL).then(results => {
+      //   const dataSet = results.data;
+
+      //   const cleanResults = dataSet.results.map(result => {
+      //     const cleanResult = result;
+      //     cleanResult.question = unescapeHtml(result.question);
+      //     cleanResult.correct_answer = unescapeHtml(result.correct_answer);
+      //     cleanResult.incorrect_answers = result.incorrect_answers.map(
+      //       tempAnswer => {
+      //         return unescapeHtml(tempAnswer);
+      //       }
+      //     );
+      //     return result;
+      //   });
+      //   console.log(JSON.stringify(cleanResults[0], null, 2));
+
+      //   function unescapeHtml(text) {
+      //     return text
+      //       .replace(/&amp;/g, "&")
+      //       .replace(/&lt;/g, "<")
+      //       .replace(/&gt;/g, ">")
+      //       .replace(/&quot;/g, '"')
+      //       .replace(/&#039;/g, "'");
+      //   }
     });
   });
 

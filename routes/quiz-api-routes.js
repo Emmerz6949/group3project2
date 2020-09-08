@@ -16,7 +16,7 @@ module.exports = function(app) {
 
   app.get("/api/scores", (req, res) => {
     db.Score.findAll({
-      include: [db.Category, db.Player]
+      include: [db.Category, db.User]
     }).then(dbScore => {
       res.json(dbScore);
     });
