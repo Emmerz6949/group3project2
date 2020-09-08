@@ -1,34 +1,43 @@
 $(document).ready(() => {
-  $(document).ready(() => {
-    $(".sidenav").sidenav();
-  });
+   //adds functionality to sidebar
+   $('.sidenav').sidenav(); 
 
-  //array of categories for user to choose from
-  const categories = [
-    "Video Games",
-    "Books",
-    "Cartoons and Animations",
-    "Film",
-    "Music",
-    "Board Games",
-    "Television"
-  ];
+   //array of categories for user to choose from 
+   let categories = ['Video Games', 'Books', 'Cartoons and Animations', 
+   'Film', 'Music', 'Television' ]
 
-  //creates new card for each quiz category
-  categories.forEach(category => {
-    const newCategory = $("<div>").addClass("s12 l6");
+   //creates new card for each quiz category 
+   categories.forEach(category => {
+     let newCategory = $('<div>').addClass('s12 l6'); 
+     
+     let card = $('<div>').addClass('card'); 
 
-    const card = $("<div>").addClass("card");
+     let content = $('<div>').addClass('card-content'); 
 
-    const content = $("<div>").addClass("card-content");
+     let categoryTitle = $('<span>').addClass('card-title'); 
+     categoryTitle.text(category); 
 
-    const categoryTitle = $("<span>").addClass("card-title");
-    categoryTitle.text(category);
+     let btn = $('<a>').addClass('waves-effect waves-light card-btn btn-large'); 
+     btn.attr('data-quiz', category); 
+     btn.text('Take Quiz'); 
 
-    content.append(categoryTitle);
-    card.append(content);
-    newCategory.append(card);
+     //when user clicks quiz, makes api call in generateQuiz
+     btn.on('click', function(){
+       generateQuiz(category);  
+     })
 
-    $(".row").append(newCategory);
-  });
+     content.append(categoryTitle, btn); 
+     card.append(content); 
+     newCategory.append(card); 
+
+     $('.category-row').append(newCategory); 
+   })
+
+   const generateQuiz  = category =>{
+     alert(category); 
+     //when user clicks take quiz
+     //the appropriate quiz will appear
+     //ajax call to right quiz using the data-quiz attribute set to each button
+   }
+ 
 });
