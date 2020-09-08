@@ -34,7 +34,8 @@ nav ul li:hover {
   bottom: -310px; 
 }
 
-.highscore{ 
+.highscore, h1{ 
+  margin: 0 auto; 
   background-color: white; 
   width: 500px; 
   padding: 10 px; 
