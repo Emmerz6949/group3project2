@@ -37,10 +37,10 @@ $(document).ready(() => {
      //alert(category); 
 
      $.ajax({
-       url: "/api/categories", 
+       url: "/quiz/15", 
        method: "GET"
      }).then(function(response){ 
-       console.log(response); 
+       return; 
      })
      //when user clicks take quiz
      //the appropriate quiz will appear
