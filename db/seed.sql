@@ -1,6 +1,6 @@
 USE openquiz_db;
 
-INSERT INTO category_table (category_name, api_category_id)
+INSERT INTO categories (categoryName, apiCategoryId)
 VALUES ("Books",10),
        ("Film",11),
        ("Music",12),

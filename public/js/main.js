@@ -1,27 +1,34 @@
 $(document).ready(() => {
-  $(document).ready(function(){ 
-    $('.sidenav').sidenav(); 
-  })
+  $(document).ready(() => {
+    $(".sidenav").sidenav();
+  });
 
-  //array of categories for user to choose from 
-  let categories = ['Video Games', 'Books', 'Cartoons and Animations', 
-  'Film', 'Music', 'Board Games', 'Television' ]
+  //array of categories for user to choose from
+  const categories = [
+    "Video Games",
+    "Books",
+    "Cartoons and Animations",
+    "Film",
+    "Music",
+    "Board Games",
+    "Television"
+  ];
 
-  //creates new card for each quiz category 
+  //creates new card for each quiz category
   categories.forEach(category => {
-    let newCategory = $('<div>').addClass('s12 l6'); 
-    
-    let card = $('<div>').addClass('card'); 
+    const newCategory = $("<div>").addClass("s12 l6");
 
-    let content = $('<div>').addClass('card-content'); 
+    const card = $("<div>").addClass("card");
 
-    let categoryTitle = $('<span>').addClass('card-title'); 
-    categoryTitle.text(category); 
+    const content = $("<div>").addClass("card-content");
 
-    content.append(categoryTitle); 
-    card.append(content); 
-    newCategory.append(card); 
+    const categoryTitle = $("<span>").addClass("card-title");
+    categoryTitle.text(category);
 
-    $('.row').append(newCategory); 
-  })
+    content.append(categoryTitle);
+    card.append(content);
+    newCategory.append(card);
+
+    $(".row").append(newCategory);
+  });
 });
