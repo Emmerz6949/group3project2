@@ -34,13 +34,16 @@ app.use(passport.session());
 
 require("./routes/html-routes.js")(app);
 require("./routes/api-routes.js")(app);
-
-require("./routes/quiz-html-routes.js")(app);
 require("./routes/quiz-api-routes.js")(app);
 
 // Syncing our database and logging a message to the user upon success
 async function tableUpdate() {
   await db.sequelize.sync({ force: true });
+
+  await db.User.create({
+    email: "testy@mctesterson.net",
+    password: "test123"
+  });
 
   await db.Category.bulkCreate([
     { categoryName: "Books", apiCategoryId: 10 },
