@@ -1,50 +1,56 @@
 $(document).ready(() => {
-   //adds functionality to sidebar
-   $('.sidenav').sidenav(); 
+  //adds functionality to sidebar
+  $(".sidenav").sidenav();
 
-   //array of categories for user to choose from 
-   let categories = ['Video Games', 'Books', 'Cartoons and Animations', 
-   'Film', 'Music', 'Television' ]
+  //array of categories for user to choose from
+  const categories = [
+    "Video Games",
+    "Books",
+    "Cartoons and Animations",
+    "Film",
+    "Music",
+    "Television"
+  ];
 
-   //creates new card for each quiz category 
-   categories.forEach(category => {
-     let newCategory = $('<div>').addClass('s12 l6'); 
-     
-     let card = $('<div>').addClass('card center'); 
+  //creates new card for each quiz category
+  categories.forEach(category => {
+    const newCategory = $("<div>").addClass("s12 l6");
 
-     let content = $('<div>').addClass('card-content'); 
+    const card = $("<div>").addClass("card center");
 
-     let categoryTitle = $('<span>').addClass('card-title'); 
-     categoryTitle.text(category); 
+    const content = $("<div>").addClass("card-content");
 
-     let btn = $('<a>').addClass('waves-effect waves-light card-btn btn-large'); 
-     btn.attr('data-quiz', category); 
-     btn.text('Take Quiz'); 
+    const categoryTitle = $("<span>").addClass("card-title");
+    categoryTitle.text(category);
 
-     //when user clicks quiz, makes api call in generateQuiz
-     btn.attr('href', '/quiz/15');
+    const btn = $("<a>").addClass(
+      "waves-effect waves-light card-btn btn-large"
+    );
+    btn.attr("data-quiz", category);
+    btn.text("Take Quiz");
 
-     content.append(categoryTitle, btn); 
-     card.append(content); 
-     newCategory.append(card); 
+    //when user clicks quiz, makes api call in generateQuiz
+    btn.attr("href", "/quiz/15");
 
-     $('.category-row').append(newCategory); 
-   })
+    content.append(categoryTitle, btn);
+    card.append(content);
+    newCategory.append(card);
 
-   const generateQuiz  = category =>{
-     //alert(category); 
+    $(".category-row").append(newCategory);
+  });
 
-     //when user clicks take quiz
-     //the appropriate quiz will appear
-     //ajax call to right quiz using the data-quiz attribute set to each button
-     $.ajax({
-       //url specific to videogames
-       url: "/quiz/15", 
-       method: "GET"
-     }).then(function(response){ 
-       return; 
-     })
+  const generateQuiz = category => {
+    //alert(category);
 
-   }
- 
+    //when user clicks take quiz
+    //the appropriate quiz will appear
+    //ajax call to right quiz using the data-quiz attribute set to each button
+    $.ajax({
+      //url specific to videogames
+      url: "/quiz/15",
+      method: "GET"
+    }).then(response => {
+      return;
+    });
+  };
 });

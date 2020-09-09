@@ -8,11 +8,15 @@ const isAuthenticated = require("../config/middleware/isAuthenticated");
 module.exports = function(app) {
   app.get("/", (req, res) => {
     // If the user already has an account send them to the members page
-    if (req.user) {
-      res.redirect("/members");
-    }
-    //res.sendFile(path.join(__dirname, "../public/signup.html"));
-    res.render("index");
+    // if (req.user) {
+    //   res.redirect("/members");
+    // }
+    res.sendFile(path.join(__dirname, "../public/index.html"));
+    // res.render("index");
+  });
+
+  app.get("/category", (req, res) => {
+    res.sendFile(path.join(__dirname, "../public/categories.html"));
   });
 
   app.get("/quiz/15", (req, res) => {
@@ -63,7 +67,19 @@ module.exports = function(app) {
    }); */
 
   app.get("/score", (req, res) => {
-    res.render("score");
+    db.Score.findAll({
+      include: [db.Category, db.User],
+      order: [['score', 'DESC']]
+    }).then(dbScore => {
+      const resultsJSON = dbScore.map(result => {
+        return result.toJSON();
+      });
+
+      // console.log("\x1b[33m%s\x1b[0m", JSON.stringify(resultsJSON)); //yellow
+      res.render("scores", { userScore: resultsJSON });
+    });
+    // res.sendFile(path.join(__dirname, "../public/highscores.html"));
+    // // res.render("score");
   });
 
   //todo: update "sendFile" to res.render("handlebar page") equivelent to the html page
