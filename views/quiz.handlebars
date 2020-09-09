@@ -1,18 +1,18 @@
-<nav class="nav-wrapper transparent">
-    <div class="container">
-      <a href="index.html" class="brand-logo center">
-        <span class="deep-orange-text">The Trivia Project</span>
-      </a>
-      <a href="#" class="sidenav-trigger deep-orange-text" data-target = "mobile-links">
-        <i class="material-icons">menu</i>
-      </a>
-      <ul id = 'nav-mobile' class= "left hide-on-med-and-down">
-        <li><a href="index.html"><span class="deep-orange-text">Home</span></a></li>
-        <li><a href="highscores.html"><span class="deep-orange-text">Highscores</span></a></li>
-        <li><a href="categories.html"><span class="deep-orange-text">Take Quiz</span></a></li>
-      </ul>
+  <nav class="nav-wrapper transparent">
+      <div class="container">
+        <a href="index.html" class="brand-logo center">
+          <span class="deep-orange-text">The Trivia Project</span>
+        </a>
+        <a href="#" class="sidenav-trigger deep-orange-text" data-target = "mobile-links">
+          <i class="material-icons">menu</i>
+        </a>
+        <ul id = 'nav-mobile' class= "left hide-on-med-and-down">
+          <li><a href="index.html"><span class="deep-orange-text">Home</span></a></li>
+          <li><a href="highscores.html"><span class="deep-orange-text">Highscores</span></a></li>
+          <li><a href="categories.html"><span class="deep-orange-text">Take Quiz</span></a></li>
+        </ul>
 
-    </div>
+      </div>
   </nav>
 
   <ul class="sidenav" id="mobile-links">
@@ -28,9 +28,9 @@
 
         {{#each trivia}}
             <h5 class="center">{{this.questionText}}</h5>
-            <ul class="center">
+            <ul class="center" id="{{this.id}}">
                 {{#each this.Answers}}
-                    <li class="btn deep-orange amber lighten-5-text" data-id="{{this.isCorrect}}">{{this.answerText}}</li>
+                    <li class="btn deep-orange amber waves-effect waves-light lighten-5-text answer" data-id="{{this.isCorrect}}">{{this.answerText}}</li>
                 {{/each}}
             </ul>
         {{/each}}
@@ -54,6 +54,26 @@
     $(document).ready(function(){ 
       //adds functionality to sidebar
       $('.sidenav').sidenav();
+
+      let score = 0;
+
+      $('.btn').on('click', function() {
+        event.preventDefault();
+
+        $(this).siblings('.answer').addClass('disabled');
+        $(this).addClass('disabled');
+        $(this).css("border", "2px solid #ff5722");
+        const dataId = $(this).attr('data-id');
+        console.log(dataId);
+
+        if (dataId === "true") {
+          score = score+1;
+        }
+        else if (dataId === "false"){
+          score = score-1;
+        }
+        console.log(score);
+      });
     });
   </script>
 
@@ -65,7 +85,7 @@
             <li>{{wrong}}</li>
         </ul>
     {{/each}} --}}
-</nav>
+
 
 {{!--     <li>
             {{question}}
