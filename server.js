@@ -55,6 +55,7 @@ async function tableUpdate() {
     { categoryName: "Cartoons", apiCategoryId: 32 }
   ]);
 
+  //fix this 
   const quizURL =
     "https://opentdb.com/api.php?amount=10&category=15&difficulty=easy&type=multiple";
 
